@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>only for habibatiii 🎀</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#ffd6e0;
+font-family:'Segoe UI',sans-serif;
+overflow:hidden;
+}
+
+.container{
+background:white;
+padding:40px;
+border-radius:30px;
+border:5px solid #f6a5b6;
+text-align:center;
+max-width:500px;
+position:relative;
+}
+
+h1{color:#ff4d6d;}
+
+select,button{
+padding:12px 20px;
+margin:10px;
+border-radius:30px;
+border:none;
+font-size:1rem;
+}
+
+button{
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+font-weight:bold;
+position:relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1 id="question"></h1>
+<div id="content"></div>
+</div>
+
+<script>
+const q=document.getElementById("question");
+const c=document.getElementById("content");
+
+function dateSelectors(id){
+return `
+<select id="${id}d">${[...Array(31)].map((_,i)=>`<option>${String(i+1).padStart(2,'0')}</option>`).join('')}</select>
+<select id="${id}m">${[...Array(12)].map((_,i)=>`<option>${String(i+1).padStart(2,'0')}</option>`).join('')}</select>
+<select id="${id}y">${[...Array(30)].map((_,i)=>`<option>${2000+i}</option>`).join('')}</select>
+`;
+}
+
+function checkDate(id,d,m,y,next){
+if(
+document.getElementById(id+"d").value===d &&
+document.getElementById(id+"m").value===m &&
+document.getElementById(id+"y").value===y
+){next();}
+else{alert("awileeeeeeeeeeeey :(");}
+}
+
+/* ---------- VERIFICATION ORDER MODIFIÉ ---------- */
+
+function herBD(){
+q.innerText="just to be sure it's you a mrihibtii, what's your birthday ?";
+c.innerHTML=dateSelectors("her")+`<br>
+<button onclick="checkDate('her','19','04','2007',myBD)">continue</button>`;
+}
+
+function myBD(){
+q.innerText="and what's MY birthday :) ?";
+c.innerHTML=dateSelectors("my")+`<br>
+<button onclick="checkDate('my','29','01','2006',relationDate)">continue</button>`;
+}
+
+function relationDate(){
+q.innerText="choose the date our relationship started 💖, nariiiiii w tghltiii";
+c.innerHTML=dateSelectors("rel")+`<br>
+<button onclick="checkDate('rel','31','08','2025',intro)">continue</button>`;
+}
+
+function intro(){
+q.innerText="hiii habibatiiii 💖";
+c.innerHTML=`<button onclick="stage1()">go to question</button>`;
+}
+
+/* ---------- CHAOS FLOW ---------- */
+
+function renderButtons(list){
+c.innerHTML="";
+list.forEach(obj=>{
+const b=document.createElement("button");
+b.innerText=obj.text;
+b.onclick=obj.action;
+c.appendChild(b);
+});
+}
+
+function moveButton(btn){
+const x=Math.random()*(window.innerWidth-120);
+const y=Math.random()*(window.innerHeight-60);
+btn.style.position="absolute";
+btn.style.left=x+"px";
+btn.style.top=y+"px";
+}
+
+function success(){
+q.innerText="YAY 💖 It's a date 😌🌸";
+c.innerHTML="";
+}
+
+let stage=1;
+
+function stage1(){
+stage=1;
+q.innerText="Would you like to go out with me next Thursday or Friday a lmysra diali ? 🎀";
+renderButtons([
+{text:"yes",action:success},
+{text:"idk",action:nextStage}
+]);
+}
+
+function nextStage(){
+stage++;
+
+if(stage===2){
+q.innerText="it's a yes or no question";
+renderButtons([
+{text:"idk",action:nextStage},
+{text:"idk",action:nextStage}
+]);
+}
+else if(stage===3){
+q.innerText=""jbaatk had l3iba hadi, ktert lik mn idk fkhbiyz, haki zidik :";
+renderButtons([
+{text:"idk",action:nextStage},
+{text:"idk",action:nextStage}
+]);
+}
+else if(stage===4){
+q.innerText="try now";
+renderButtons([
+{text:"yes",action:success},
+{text:"no",action:function(){moveButton(this)}},
+{text:"idk",action:function(){moveButton(this)}}
+]);
+}
+}
+
+/* START */
+herBD();
+</script>
+
+</body>
+</html>
